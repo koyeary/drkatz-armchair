@@ -1,6 +1,6 @@
-/* const Manager = require("./lib/Manager");
+const Manager = require("./lib/Manager");
 const Engineer = require("./lib/Engineer");
-const Intern = require("./lib/Intern"); */
+const Intern = require("./lib/Intern");
 const inquirer = require("inquirer");
 /* const path = require("path");
 const fs = require("fs");
@@ -35,6 +35,9 @@ function promptUser() {
             }
         ])
         .then(function(answers) {
+            const name = answers.name;
+            const id = answers.id;
+            const email = answers.email;
             const role = answers.role;
             if (role === "Engineer") {
                 return inquirer
@@ -45,6 +48,12 @@ function promptUser() {
                        }
                         
                     )
+                    .then(function(answers) {
+                        const gitHub = answers.gitHub;
+                        console.log([name, id, email, role, gitHub]);
+                        const engineer = new Engineer(name, id, email, role, gitHub);
+                        console.log(engineer);
+                    })
             } else if (role === "Intern") {
                 return inquirer
                 .prompt(
@@ -52,8 +61,12 @@ function promptUser() {
                         name: "school",
                         message: "School:"
                    }
-                    
                 )
+                .then(function(answers) {
+                    const school = answers.school;
+                    const intern = new Intern(name, id, email, role, school);
+                    console.log(intern);
+                })
             } else if (role === "Manager") {
                 return inquirer
                 .prompt(
@@ -63,11 +76,21 @@ function promptUser() {
                    }
                     
                 )
-                 }
-        })
+                .then(function(answers) {
+                    const officeNumber = answers.officeNumber; 
+                    const manager = new Manager(name, id, email, role, officeNumber);
+                    console.log(manager);
+                })
+                 }   
+                })    
+                    
 }
 
 promptUser();
+
+
+
+
 // Write code to use inquirer to gather information about the development team members,
 // and to create objects for each team member (using the correct classes as blueprints!)
 
