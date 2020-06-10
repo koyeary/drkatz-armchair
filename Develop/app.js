@@ -109,14 +109,19 @@ function addToTeam() {
         if (answer === "Yes") {
             addEmployee();
         } else if (answer === "No") {
-            return console.log(employees);
-        }
-    })
-}
+            const team = render(employees);
+            fs.writeFile('team.html', team, function(err) {
+                if (err) throw err;
+                console.log('saved!');
+            })
+            }
+        })
+    }
 
 
 
-//fs.writeFile('employees.txt', employees);
+
+
 
 //render(employees);
 
