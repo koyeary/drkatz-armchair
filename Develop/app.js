@@ -1,6 +1,7 @@
-const Manager = require("./lib/Manager");
-const Engineer = require("./lib/Engineer");
-const Intern = require("./lib/Intern");
+const Employee = require("../lib/Employee");
+const Manager = require("../lib/Manager");
+const Engineer = require("../lib/Engineer");
+const Intern = require("../lib/Intern");
 const inquirer = require("inquirer");
 /* const path = require("path");
 const fs = require("fs");
@@ -11,7 +12,9 @@ const outputPath = path.join(OUTPUT_DIR, "team.html");
 const render = require("./lib/htmlRenderer"); */
 
 function promptUser() {
-    return inquirer
+
+
+       return inquirer
         .prompt([
             {
                 message: "Employee name:",
@@ -28,13 +31,13 @@ function promptUser() {
             {
                 type: "rawlist",
                 name: "role",
-                message: "This employee is an:",
+                message: "Employee Role:",
                 choices: ["Engineer",
                         "Intern",
                         "Manager"]
             }
-        ])
-        .then(function(answers) {
+        ]) 
+         .then(function(answers) {
             const name = answers.name;
             const id = answers.id;
             const email = answers.email;
@@ -84,7 +87,7 @@ function promptUser() {
                  }   
                 })    
                     
-}
+            }
 
 promptUser();
 
