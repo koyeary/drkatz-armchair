@@ -5,7 +5,7 @@ A Node CLI that takes in information about employees and generates an HTML webpa
 
 After downloading, you'll want to install the Inquirer npm package. The Output directory contains an example of a rendered html file, as well as a local file of css styling. When you run the program yourself, it will overwrite the existing html file.
 
-You can also check out the example site here: https://drive.google.com/file/d/14BYnjwHFutwgRpNMnlLSEpF_AiEOY2iK/view?usp=sharing.
+You can also check out the functionality and example site here: https://drive.google.com/file/d/1UjDV9gjNAHx67ka6DOmb-YPZOIwtFUCJ/view
 
 ## Usage
 
