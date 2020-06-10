@@ -11,10 +11,11 @@ const outputPath = path.join(OUTPUT_DIR, "team.html");
 
 const render = require("./lib/htmlRenderer");
 
-const arr = [];
-function promptUser() {
+let employees = [];
 
+addEmployee();
 
+function addEmployee() {
        return inquirer
         .prompt([
             {
@@ -54,9 +55,9 @@ function promptUser() {
                     )
                     .then(function(answers) {
                         const gitHub = answers.gitHub;
-                        const engineer = new Engineer(name, id, email, role, gitHub);
-                        arr.push(engineer);
-                        console.log(arr);
+                        const engineer = new Engineer(name, id, email, gitHub);
+                        employees.push(engineer);
+                        addToTeam();
                     })
             } else if (role === "Intern") {
                 return inquirer
@@ -68,9 +69,9 @@ function promptUser() {
                 )
                 .then(function(answers) {
                     const school = answers.school;
-                    const intern = new Intern(name, id, email, role, school);
-                    arr.push(intern);
-                    console.log(arr);
+                    const intern = new Intern(name, id, email, school);
+                    employees.push(intern);
+                    addToTeam();
                 })
             } else if (role === "Manager") {
                 return inquirer
@@ -83,17 +84,41 @@ function promptUser() {
                 )
                 .then(function(answers) {
                     const officeNumber = answers.officeNumber; 
-                    const manager = new Manager(name, id, email, role, officeNumber);
-                    arr.push(manager);
-                    console.log(arr);
+                    const manager = new Manager(name, id, email, officeNumber);
+                    employees.push(manager);
+                    addToTeam();
                 })
                  }   
                 })    
                     
             }
 
-promptUser();
 
+function addToTeam() {
+    return inquirer
+    .prompt(
+        {
+        type: "rawlist",
+        name: "buildTeam",
+        message: "Would you like to add another Team Member?",
+        choices: ["Yes", "No"]
+    }
+    )
+    .then(function(answers) {
+        const answer = answers.buildTeam;
+        if (answer === "Yes") {
+            addEmployee();
+        } else if (answer === "No") {
+            return console.log(employees);
+        }
+    })
+}
+
+
+
+//fs.writeFile('employees.txt', employees);
+
+//render(employees);
 
 
 
