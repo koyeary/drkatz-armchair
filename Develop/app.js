@@ -1,16 +1,17 @@
-const Employee = require("../lib/Employee");
-const Manager = require("../lib/Manager");
-const Engineer = require("../lib/Engineer");
-const Intern = require("../lib/Intern");
+const Employee = require("./lib/Employee");
+const Manager = require("./lib/Manager");
+const Engineer = require("./lib/Engineer");
+const Intern = require("./lib/Intern");
 const inquirer = require("inquirer");
-/* const path = require("path");
+const path = require("path");
 const fs = require("fs");
 
 const OUTPUT_DIR = path.resolve(__dirname, "output");
 const outputPath = path.join(OUTPUT_DIR, "team.html");
 
-const render = require("./lib/htmlRenderer"); */
+const render = require("./lib/htmlRenderer");
 
+const arr = [];
 function promptUser() {
 
 
@@ -53,9 +54,9 @@ function promptUser() {
                     )
                     .then(function(answers) {
                         const gitHub = answers.gitHub;
-                        console.log([name, id, email, role, gitHub]);
                         const engineer = new Engineer(name, id, email, role, gitHub);
-                        console.log(engineer);
+                        arr.push(engineer);
+                        console.log(arr);
                     })
             } else if (role === "Intern") {
                 return inquirer
@@ -68,7 +69,8 @@ function promptUser() {
                 .then(function(answers) {
                     const school = answers.school;
                     const intern = new Intern(name, id, email, role, school);
-                    console.log(intern);
+                    arr.push(intern);
+                    console.log(arr);
                 })
             } else if (role === "Manager") {
                 return inquirer
@@ -82,7 +84,8 @@ function promptUser() {
                 .then(function(answers) {
                     const officeNumber = answers.officeNumber; 
                     const manager = new Manager(name, id, email, role, officeNumber);
-                    console.log(manager);
+                    arr.push(manager);
+                    console.log(arr);
                 })
                  }   
                 })    
