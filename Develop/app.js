@@ -6,16 +6,18 @@ const inquirer = require("inquirer");
 const path = require("path");
 const fs = require("fs");
 
-const OUTPUT_DIR = path.resolve(__dirname, "output");
-const outputPath = path.join(OUTPUT_DIR, "team.html");
+const OUTPUT_DIR = path.resolve(__dirname, "output"); //User output directory.
+const outputPath = path.join(OUTPUT_DIR, "team.html"); //Specifies the file in the output directory.
 
-const render = require("./lib/htmlRenderer");
+const render = require("./lib/htmlRenderer"); 
 
-let employees = [];
 
-addEmployee();
+let employees = []; //This array captures employee objects.
 
-function addEmployee() {
+newTeam();
+
+//This function captures the basic information needed to build individual team members.
+function newTeam() {
     return inquirer
         .prompt([
             {
@@ -39,6 +41,7 @@ function addEmployee() {
                     "Manager"]
             }
         ])
+        //The follow then statements capture information specific to each employee role.
         .then(function (answers) {
             const name = answers.name;
             const id = answers.id;
@@ -57,7 +60,7 @@ function addEmployee() {
                         const gitHub = answers.gitHub;
                         const engineer = new Engineer(name, id, email, gitHub);
                         employees.push(engineer);
-                        addToTeam();
+                        addEmployee();
                     })
             } else if (role === "Intern") {
                 return inquirer
@@ -71,7 +74,7 @@ function addEmployee() {
                         const school = answers.school;
                         const intern = new Intern(name, id, email, school);
                         employees.push(intern);
-                        addToTeam();
+                        addEmployee();
                     })
             } else if (role === "Manager") {
                 return inquirer
@@ -86,15 +89,15 @@ function addEmployee() {
                         const officeNumber = answers.officeNumber;
                         const manager = new Manager(name, id, email, officeNumber);
                         employees.push(manager);
-                        addToTeam();
+                        addEmployee();
                     })
             }
         })
 
 }
 
-
-function addToTeam() {
+//If the user wants to add another employee, execute the new team function again.
+function addEmployee() {
     return inquirer
         .prompt(
             {
@@ -107,9 +110,11 @@ function addToTeam() {
         .then(function (answers) {
             const answer = answers.buildTeam;
             if (answer === "Yes") {
-                addEmployee();
+                newTeam();
+                //If the user has no more employees to add to the team, save the file to the output directory.
             } else if (answer === "No") {
                 const team = render(employees);
+                //Create the output directory and save the file to the directory. If the directory already exists, save the file to the existing directory.
                 fs.mkdir(OUTPUT_DIR, err => {
                     if (err) {
                             console.log("File saved to output directory.");
@@ -124,6 +129,7 @@ function addToTeam() {
        
 }
 
+//This function writes your rendered employee generator to the team.html file.
 function writeHtml(team) {
     fs.writeFile(outputPath, team, err => {
         if (err) {
@@ -134,12 +140,4 @@ function writeHtml(team) {
     })
 }
 
-
-
-
-// After you have your html, you're now ready to create an HTML file using the HTML
-// returned from the `render` function. Now write it to a file named `team.html` in the
-// `output` folder. You can use the variable `outputPath` above target this location.
-// Hint: you may need to check if the `output` folder exists and create it if it
-// does not.
 
