@@ -112,11 +112,11 @@ function addToTeam() {
                 const team = render(employees);
                 fs.mkdir(OUTPUT_DIR, err => {
                     if (err) {
-                            console.log("error");
-                            writeIt(team);
+                            console.log("File saved to output directory.");
+                            writeHtml(team);
                     } else {
-                            console.log("saved");
-                            writeIt(team);
+                            console.log("Output directory created. File saved to output directory.");
+                            writeHtml(team);
                             }
                         })
                     } 
@@ -124,12 +124,12 @@ function addToTeam() {
        
 }
 
-function writeIt(team) {
+function writeHtml(team) {
     fs.writeFile(outputPath, team, err => {
         if (err) {
-            console.log("error file");
+            console.log("Error! File did not save successfully.");
         } else {
-            console.log("saved file");
+            console.log("File saved successfully");
         }
     })
 }
