@@ -1,0 +1,33 @@
+body {
+    background-color: #EFEBEE;
+}
+
+a {
+    color: #689B2A;
+}
+.jumbotron {
+    background-color: #C70039;
+    font-family: 'Quicksand', sans-serif;
+    color: #FFFFFF;
+}
+
+.team-area {
+    font-family: 'Open Sans', sans-serif;
+}
+
+.employee-card {
+    margin: 20px;
+    box-shadow: 0 10px 20px #777;
+    background-color: #FFFDFD;
+    color: #32293d
+}
+
+
+.card-header {
+    background-color: #32293d;
+    color: #EFEBEE;
+}
+
+.list-group {
+    background-color: #EFEBEE;
+}
